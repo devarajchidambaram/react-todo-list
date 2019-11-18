@@ -1,40 +1,26 @@
 import React from 'react'
+import { connect } from "react-redux";
+import  {addTodo}  from '../actions/todoAction'
 
 class Todo extends React.Component {
     constructor(props){
         super(props)
-
-        this.state = {
-            items : [
-                {
-                    id: Date.now(),
-                    text: 'pay eb bill'
-                },
-                {
-                    id: Date.now(),
-                    text: 'buy cellphone'
-                }
-            ],
-            text : ''
-        }
     }
 
     render(){
+
         return (
             <div>
                 <h3>Todo list</h3>         
-                <TodoList  items={this.state.items} />
+                <TodoList  todos={this.props.todos} />
 
-                <form onSubmit={this.handleSubmit}>
                     <input
-                        onChange={this.handleChange}
-                        value={this.state.text}
+                     onKeyUp = {this.handleSubmit}
                         placeholder= 'Add some task...'
                     />
                     <button >
-                         Add #{this.state.items.length + 1}
+                         Add #{this.props.todos.length + 1}
                     </button>
-                </form>
             </div>
         )
     }
@@ -46,21 +32,19 @@ class Todo extends React.Component {
     }
 
     handleSubmit = (e) =>{
+       //# improve me
+        //This is not the efficent way
         e.preventDefault();
 
-        if(!this.state.text.length) {
-            return;
-        }
+        if(e.key !== 'Enter') return
 
         const todo ={
             id: Date.now(),
-            text: this.state.text
+            text: e.target.value
         }
 
-    this.setState(prev => ({
-        text : '',
-        items :  [...prev.items, todo]
-    }))
+        this.props.addTodo(todo)
+        e.target.value = ''
     }
 }
 
@@ -69,9 +53,9 @@ class TodoList extends React.Component {
         return (
             <ul>
                 {
-                    this.props.items.map( item =>{
+                    this.props.todos.map( todo =>{
                       return (
-                      <li key={item.id}> {item.text}</li>
+                      <li key={todo.id}> {todo.text}</li>
                       )
                     })
                 }
@@ -80,4 +64,21 @@ class TodoList extends React.Component {
     }
 }
 
- export default Todo;
+
+// Get state data from store to props
+const mapStateToProps = (state) => {
+    return {
+      ...state.todos_reducer
+    };
+}
+
+// Get actions to handle store data
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addTodo: (todo) => dispatch(addTodo(todo))
+    };
+}
+
+
+// Wire it all up and export
+export default connect(mapStateToProps, mapDispatchToProps)(Todo);
