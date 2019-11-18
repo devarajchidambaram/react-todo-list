@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from "react-redux";
-import  {addTodo}  from '../actions/todoAction'
+import  {addTodo, deleteTodo}  from '../actions/todoAction'
+import TodoList from './todoList'
 
 class Todo extends React.Component {
     constructor(props){
@@ -26,9 +27,9 @@ class Todo extends React.Component {
     }
 
     handleChange = e =>{
-        this.setState({
-            text : e.target.value
-        })
+        // this.setState({
+        //     text : e.target.value
+        // })
     }
 
     handleSubmit = (e) =>{
@@ -48,22 +49,6 @@ class Todo extends React.Component {
     }
 }
 
-class TodoList extends React.Component {
-    render(){
-        return (
-            <ul>
-                {
-                    this.props.todos.map( todo =>{
-                      return (
-                      <li key={todo.id}> {todo.text}</li>
-                      )
-                    })
-                }
-            </ul>
-        )
-    }
-}
-
 
 // Get state data from store to props
 const mapStateToProps = (state) => {
@@ -75,7 +60,8 @@ const mapStateToProps = (state) => {
 // Get actions to handle store data
 const mapDispatchToProps = (dispatch) => {
     return {
-        addTodo: (todo) => dispatch(addTodo(todo))
+        addTodo: (todo) => dispatch(addTodo(todo)),
+        deleteTodo : (id) =>  dispatch(deleteTodo(id))
     };
 }
 

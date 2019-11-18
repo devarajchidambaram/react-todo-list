@@ -7,9 +7,17 @@ const TODO_DEFAULT = {
         text: 'pay eb bill'
     },
     {
-        id: Date.now() +1,
+        id: Date.now() +10,
         text: 'buy cellphone'
-    }
+    },
+    {
+      id: Date.now() +20,
+      text: 'buy milk'
+  },
+  {
+    id: Date.now() +40,
+    text: 'check for post'
+}
 ],
 text : ''
 
@@ -30,7 +38,16 @@ function todo(state = TODO_DEFAULT, action) {
       case UPDATE_TODO:
         return state
       case DELETE_TODO:
-        return state
+        console.log('REDUCERER delete todo.................', action.id)
+          const id = action.id
+          const todos = state.todos.filter((todo)=>  ( todo.id !== action.id))
+
+          console.log('states===========', todos)
+
+        return {
+          ...state,
+          todos
+        }
       default:
         return state
     }
