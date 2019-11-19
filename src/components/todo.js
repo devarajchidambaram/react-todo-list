@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from "react-redux";
 import  {addTodo, deleteTodo}  from '../actions/todoAction'
 import TodoList from './todoList'
+import Login from './login'
 
 class Todo extends React.Component {
     constructor(props){
@@ -53,7 +54,7 @@ class Todo extends React.Component {
 // Get state data from store to props
 const mapStateToProps = (state) => {
     return {
-      ...state.todos_reducer
+      ...state.todoReducer
     };
 }
 

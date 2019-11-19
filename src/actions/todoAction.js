@@ -1,13 +1,13 @@
-import { ADD_TODO, DELETE_TODO} from '../constants/action_types'
+ import { TodoConstants} from '../constants'
 
 // Action to add article to store
  export  const addTodo = todo => ({
-    type: ADD_TODO,
+    type: TodoConstants.ADD_TODO,
      todo
 });
 
 export  const deleteTodo = id => ({
-    type: DELETE_TODO,
+    type: TodoConstants.DELETE_TODO,
     id
 });
 

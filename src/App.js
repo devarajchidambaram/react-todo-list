@@ -5,7 +5,7 @@ import Todo from './components/todo'
 
 function App() {
   return (
-      <Todo/>
+     <h1> Welcome</h1>
   );
 }
 

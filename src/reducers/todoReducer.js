@@ -1,4 +1,5 @@
-import {ADD_TODO , UPDATE_TODO, DELETE_TODO} from '../constants/action_types'
+import {TodoConstants} from '../constants'
+
 
 const TODO_DEFAULT = {
   todos : [
@@ -30,14 +31,14 @@ todos.filter((todo.id)=> t)
 
 function todo(state = TODO_DEFAULT, action) {
     switch (action.type) {
-      case ADD_TODO:
+      case TodoConstants.ADD_TODO:
             return {
                 ...state,
                 todos: [...state.todos , action.todo]
             }
-      case UPDATE_TODO:
+      case TodoConstants.UPDATE_TODO:
         return state
-      case DELETE_TODO:
+      case TodoConstants.DELETE_TODO:
         console.log('REDUCERER delete todo.................', action.id)
           const id = action.id
           const todos = state.todos.filter((todo)=>  ( todo.id !== action.id))
