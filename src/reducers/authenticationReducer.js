@@ -12,7 +12,8 @@ export default function authentication(state = initialState, action) {
   
   switch (action.type) {
     case userConstants.LOGIN_REQUEST:   
-     
+     //==
+     console.log('LOGIN REQUEST ################')
       return {
         loggingIn: true,
         user: action.user
